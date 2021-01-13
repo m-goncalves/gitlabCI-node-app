@@ -15,7 +15,7 @@ test artifact:
   image: alpine
   stage: test
   script:
-  - grep Gatsby ./public/index.html 
+  - grep "Gatsby" ./public/index.html 
 
 test website:
   stage: test
