@@ -16,10 +16,12 @@ test artifact:
   image: alpine
   stage: test
   script:
-  - grep "Gatsby" ./public/index.html
-  - grep "xxxxxxx" ./public/index.html 
+  - grep -q "Gatsby" ./public/index.html
 
 test website:
+  image: node
   stage: test
   script:
+  - npm install
+  - npm install -g gatsby-cli
   - gatsby serve
