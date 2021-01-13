@@ -26,4 +26,4 @@ test website:
   - npm install -g gatsby-cli
   - gatsby serve &
   - sleep 15
-  - curl "http://localhost:9090/" | tac | tac | grep -g "Gatsby"
+  - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
