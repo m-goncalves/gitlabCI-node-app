@@ -15,7 +15,7 @@ cache:
 
 variables:
   STAGING_DOMAIN: marc-staging.surge.sh
-  PRODUCTION_DOMAIN: marc.surge.sh
+  PRODUCTION_DOMAIN: marc-production.surge.sh
 
 build website:
   stage: build
@@ -51,6 +51,7 @@ deploy review:
   environment:
     name: review/CI_COMMIT_REF_NAME
     url: https://marc-$CI_ENVIRONMENT_SLUG.surge.sh
+
 deploy staging:
   stage: deploy staging
   environment:
