@@ -19,9 +19,6 @@ variables:
 
 build website:
   stage: build
-  # only:
-  # - master
-  # - merge_request
   script:
   - npm install
   - npm install -g gatsby-cli
@@ -46,8 +43,8 @@ test artifact:
 #   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
 
 deploy review:
-  # only:
-  #   - merge_request
+  only:
+    - merge_request
   stage: deploy staging
   script:
     - ls
@@ -55,8 +52,8 @@ deploy review:
     - npm install --global surge
     - surge --project ./public/ --domain $STAGING_DOMAIN
   environment:
-    name: review/CI_COMMIT_REF_NAME
-    url: https://marc-$CI_ENVIRONMENT_SLUG.surge.sh
+    name: review/$CI_COMMIT_REF_NAME
+    url: https://marc-$CI_COMMIT_REF_NAME.surge.sh
 
 deploy staging:
   stage: deploy staging
