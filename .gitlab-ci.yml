@@ -1,8 +1,10 @@
+image: node:10
+
 stages:
   - build
   - test
+  - deploy
 build website:
-  image: node:10
   stage: build
   script:
   - npm install
@@ -18,12 +20,17 @@ test artifact:
   script:
   - grep -q "Gatsby" ./public/index.html
 
-test website:
-  image: node
-  stage: test
+# test website:
+#   stage: test
+#   script:
+#   - npm install
+#   - npm install -g gatsby-cli
+#   - gatsby serve &
+#   - sleep 25
+#   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
+
+deploy to surge:
+  stage: deploy
   script:
-  - npm install
-  - npm install -g gatsby-cli
-  - gatsby serve &
-  - sleep 25
-  - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
+  - npm install --global surge
+  - surge --project ./public/ --domain marc.surge.sh
