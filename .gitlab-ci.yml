@@ -20,14 +20,14 @@ test artifact:
   script:
   - grep -q "Gatsby" ./public/index.html
 
-# test website:
-#   stage: test
-#   script:
-#   - npm install
-#   - npm install -g gatsby-cli
-#   - gatsby serve &
-#   - sleep 25
-#   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
+test website:
+  stage: test
+  script:
+  - npm install
+  - npm install -g gatsby-cli
+  - gatsby serve
+  - sleep 25
+  - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
 
 deploy to surge:
   stage: deploy
