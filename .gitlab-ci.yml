@@ -21,7 +21,7 @@ build website:
   stage: build
   only:
   - master
-  - merge_request
+  # - merge_request
   script:
   - npm install
   - npm install -g gatsby-cli
