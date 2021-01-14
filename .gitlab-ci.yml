@@ -19,8 +19,8 @@ variables:
 
 build website:
   stage: build
-  only:
-  - master
+  # only:
+  # - master
   # - merge_request
   script:
   - npm install
