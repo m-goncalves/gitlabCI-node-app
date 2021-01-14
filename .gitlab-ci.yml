@@ -49,6 +49,8 @@ deploy review:
   only:
     - merge_request
   script:
+    - ld
+    - pwd
     - npm install --global surge
     - surge --project ./public/ --domain $STAGING_DOMAIN
   environment:
