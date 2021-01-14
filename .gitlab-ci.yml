@@ -33,14 +33,14 @@ test artifact:
   script:
   - grep -q "Gatsby" ./public/index.html
 
-test website:
-  stage: test
-  script:
-  - npm install
-  - npm install -g gatsby-cli
-  - gatsby serve &
-  - sleep 15
-  - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
+# test website:
+#   stage: test
+#   script:
+#   - npm install
+#   - npm install -g gatsby-cli
+#   - gatsby serve &
+#   - sleep 15
+#   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
 
 deploy review:
   only:
