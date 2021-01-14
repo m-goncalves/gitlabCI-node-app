@@ -45,7 +45,7 @@ test artifact:
 deploy review:
   only:
     - merge_request
-  stage: deploy staging
+  stage: deploy review
   script:
     - ls
     - pwd
@@ -60,8 +60,8 @@ deploy staging:
   environment:
     name: staging
     url: http://$STAGING_DOMAIN
-  only:
-    - master
+  # only:
+  #   - master
   script:
   - npm install --global surge
   - surge --project ./public/ --domain $STAGING_DOMAIN
