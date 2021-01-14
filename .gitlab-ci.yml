@@ -50,7 +50,7 @@ deploy review:
   #   - merge_request
   stage: deploy staging
   script:
-    - ld
+    - ls
     - pwd
     - npm install --global surge
     - surge --project ./public/ --domain $STAGING_DOMAIN
