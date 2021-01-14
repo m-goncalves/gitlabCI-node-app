@@ -46,8 +46,8 @@ test artifact:
 #   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
 
 deploy review:
-  only:
-    - merge_request
+  # only:
+  #   - merge_request
   script:
     - ld
     - pwd
