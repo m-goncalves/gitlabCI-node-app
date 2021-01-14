@@ -48,6 +48,7 @@ test artifact:
 deploy review:
   # only:
   #   - merge_request
+  stage: deploy staging
   script:
     - ld
     - pwd
