@@ -45,6 +45,8 @@ test artifact:
 
 deploy review:
   stage: deploy review
+  only:
+    - merge_review
   script:
     - npm install --global surge
     - surge --project ./public/ --domain marc-$CI_COMMIT_REF_NAME.surge.sh
@@ -55,6 +57,8 @@ deploy review:
 
 stop review:
   stage: deploy review
+  only:
+    - merge_requests
   variables:
     GIT_STRATEGU: none
   script:
