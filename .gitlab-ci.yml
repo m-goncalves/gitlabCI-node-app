@@ -48,12 +48,10 @@ test artifact:
   - sleep 15
   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
 
-.template_review: &review
+.review_template: &review
   stage: deploy review
   only:
     - merge_requests
-  script:
-  - npm install --global surge
 
 deploy review:
   <<: *review
@@ -62,6 +60,7 @@ deploy review:
     url: https://marc-$CI_COMMIT_REF_NAME.surge.sh
     on_stop: stop review
   script:
+    - npm install --global surge
     - surge --project ./public/ --domain marc-$CI_COMMIT_REF_NAME.surge.sh
 
 stop review:
@@ -72,6 +71,7 @@ stop review:
     name: review/$CI_COMMIT_REF_NAME
     action: stop
   script:
+  - npm install --global surge
   - surge teardown https://marc-$CI_COMMIT_REF_NAME.surge.sh
   when: manual
 
