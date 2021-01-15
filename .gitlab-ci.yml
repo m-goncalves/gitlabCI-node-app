@@ -44,17 +44,26 @@ test artifact:
 #   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
 
 deploy review:
-  # only:
-    # - merge_request
   stage: deploy review
   script:
-    - ls
-    - pwd
     - npm install --global surge
-    - surge --project ./public/ --domain $STAGING_DOMAIN
+    - surge --project ./public/ --domain marc-$CI_COMMIT_REF_NAME.surge.sh
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://marc-$CI_COMMIT_REF_NAME.surge.sh
+    on_stop: stop review
+
+stop review:
+  stage: deploy review
+  variables:
+    GIT_STRATEGU: none
+  script:
+  - npm install --global surge
+  - surge teardown https://marc-$CI_COMMIT_REF_NAME.surge.sh
+  when: manual
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
 
 deploy staging:
   stage: deploy staging
