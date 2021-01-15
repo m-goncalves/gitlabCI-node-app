@@ -46,7 +46,7 @@ test artifact:
 deploy review:
   stage: deploy review
   only:
-    - merge_review
+    - merge_requests
   script:
     - npm install --global surge
     - surge --project ./public/ --domain marc-$CI_COMMIT_REF_NAME.surge.sh
