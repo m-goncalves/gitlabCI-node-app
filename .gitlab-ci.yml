@@ -49,6 +49,7 @@ test artifact:
 #   - sleep 15
 #   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
 
+
 deploy review:
   stage: deploy review
   only:
