@@ -101,9 +101,6 @@ deploy production:
   - surge --project ./public/ --domain $PRODUCTION_DOMAIN
 
 
-
-
-
 # production test:
 #   image: alpine
 #   stage: production test
