@@ -31,14 +31,13 @@ build website:
       - ./public/
 
 test artifact:
+  stage: test
   only:
     - merge_requests
     - master
   image: alpine
-  stage: test
   script:
   - grep -q "Gatsby" ./public/index.html
-
 
 .test website:
   stage: test
@@ -49,32 +48,32 @@ test artifact:
   - sleep 15
   - curl "http://localhost:9090/" | tac | tac | grep -q "Gatsby"
 
-
-deploy review:
+.template_review: &review
   stage: deploy review
   only:
     - merge_requests
   script:
-    - npm install --global surge
-    - surge --project ./public/ --domain marc-$CI_COMMIT_REF_NAME.surge.sh
+  - npm install --global surge
+
+deploy review:
+  <<: *review
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://marc-$CI_COMMIT_REF_NAME.surge.sh
     on_stop: stop review
+  script:
+    - surge --project ./public/ --domain marc-$CI_COMMIT_REF_NAME.surge.sh
 
 stop review:
-  stage: deploy review
-  only:
-    - merge_requests
+  <<: *review
   variables:
     GIT_STRATEGU: none
-  script:
-  - npm install --global surge
-  - surge teardown https://marc-$CI_COMMIT_REF_NAME.surge.sh
-  when: manual
   environment:
     name: review/$CI_COMMIT_REF_NAME
     action: stop
+  script:
+  - surge teardown https://marc-$CI_COMMIT_REF_NAME.surge.sh
+  when: manual
 
 .deploy_template: &deploy
   only:
