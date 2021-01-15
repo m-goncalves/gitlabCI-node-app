@@ -18,6 +18,9 @@ variables:
   PRODUCTION_DOMAIN: marc-production.surge.sh
 
 build website:
+  only:
+    - merge_requests
+    - master
   stage: build
   script:
   - npm install
@@ -28,6 +31,9 @@ build website:
       - ./public/
 
 test artifact:
+  only:
+    - merge_requests
+    - master
   image: alpine
   stage: test
   script:
